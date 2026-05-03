@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Galeria de desenhos de infância em álbuns."
+    />
+    <title>Museu do Rabisco</title>
+    <link rel="icon" href="favicon.png" type="image/svg+xml" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="header">
+        <h1 class="title">Museu do Rabisco</h1>
+        <p class="subtitle"></p>
+      </header>
+
+      <main>
+        <section
+          class="view view--albums"
+          id="view-albums"
+          aria-label="Lista de álbuns"
+        >
+          <h2 class="view-heading">Álbuns</h2>
+          <ul class="albums" id="albums" role="list">
+            <!-- Preenchido via JavaScript -->
+          </ul>
+        </section>
+
+        <section
+          class="view view--photos"
+          id="view-photos"
+          hidden
+          aria-label="Fotos do álbum"
+        >
+          <div class="photos-bar">
+            <button type="button" class="back-btn" id="back-albums">
+              ← Voltar aos álbuns
+            </button>
+            <h2 class="album-title" id="album-title"></h2>
+          </div>
+          <ul class="gallery" id="gallery" role="list">
+            <!-- Preenchido via JavaScript -->
+          </ul>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <p></p>
+      </footer>
+    </div>
+
+    <!-- Lightbox com navegação (carrossel) -->
+    <div
+      class="lightbox"
+      id="lightbox"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Visualizador de imagens"
+      hidden
+    >
+      <button
+        type="button"
+        class="lightbox__backdrop"
+        id="lightbox-backdrop"
+        aria-label="Fechar"
+        tabindex="-1"
+      ></button>
+      <div class="lightbox__inner">
+        <button
+          type="button"
+          class="lightbox__close"
+          id="lightbox-close"
+          aria-label="Fechar"
+        >
+          &times;
+        </button>
+        <div class="lightbox__stage">
+          <button
+            type="button"
+            class="lightbox__nav lightbox__nav--prev"
+            id="lightbox-prev"
+            aria-label="Foto anterior"
+          >
+            ‹
+          </button>
+          <figure class="lightbox__content">
+            <img class="lightbox__img" id="lightbox-img" src="" alt="" />
+            <div class="lightbox__meta">
+              <p class="lightbox__caption" id="lightbox-caption"></p>
+              <p class="lightbox__counter" id="lightbox-counter"></p>
+            </div>
+          </figure>
+          <button
+            type="button"
+            class="lightbox__nav lightbox__nav--next"
+            id="lightbox-next"
+            aria-label="Foto seguinte"
+          >
+            ›
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

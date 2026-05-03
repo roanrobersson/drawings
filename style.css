@@ -1,0 +1,505 @@
+/* --------------------------------------------------------------------------
+   Meus desenhos de infância — estilos globais
+   Compatível com abertura local (file://) e GitHub Pages
+   -------------------------------------------------------------------------- */
+
+:root {
+  --bg: #f4f1ec;
+  --bg-pattern: #e8e2d9;
+  --text: #2c2825;
+  --text-muted: #5c5550;
+  --accent: #6b7c6b;
+  --accent-hover: #556555;
+  --card: #fffdf9;
+  --shadow: 0 8px 32px rgba(44, 40, 37, 0.08);
+  --shadow-hover: 0 12px 40px rgba(44, 40, 37, 0.12);
+  --radius: 14px;
+  --transition: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  --font: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  font-family: var(--font);
+  color: var(--text);
+  background-color: var(--bg);
+  /* Textura sutil (grade) */
+  background-image:
+    linear-gradient(90deg, var(--bg-pattern) 1px, transparent 1px),
+    linear-gradient(var(--bg-pattern) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-position: center;
+}
+
+/* Layout central */
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+}
+
+/* Cabeçalho */
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: clamp(1.75rem, 5vw, 2.35rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.5rem;
+  color: var(--text);
+}
+
+.subtitle {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  max-width: 36rem;
+  margin-inline: auto;
+  line-height: 1.5;
+}
+
+.subtitle code {
+  font-size: 0.85em;
+  background: var(--card);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px var(--bg-pattern);
+}
+
+/* Vistas: lista de álbuns vs. fotos */
+.view-heading {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 1rem;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+/* Grade de álbuns (capas) */
+.albums {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+
+.albums__item {
+  animation: itemEnter 0.5s var(--transition) both;
+}
+
+.album-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  color: var(--text);
+  overflow: hidden;
+  transition: box-shadow var(--transition), transform 0.2s ease;
+}
+
+.album-card:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-3px);
+}
+
+.album-card:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.album-card__cover {
+  display: block;
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--bg-pattern);
+}
+
+.album-card__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.album-card:hover .album-card__img,
+.album-card:focus-visible .album-card__img {
+  transform: scale(1.05);
+}
+
+.album-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.9rem 1rem 1.1rem;
+}
+
+.album-card__title {
+  display: block;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.album-card__meta {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Barra: voltar + título do álbum */
+.photos-bar {
+  margin-bottom: 1.5rem;
+}
+
+.back-btn {
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0.5rem 0.75rem;
+  margin: 0 0 0.75rem;
+  border: 2px solid var(--bg-pattern);
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--accent);
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition), color 0.2s ease;
+}
+
+.back-btn:hover {
+  border-color: var(--accent);
+  background: rgba(107, 124, 107, 0.08);
+}
+
+.back-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.album-title {
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+/* Galeria em grid */
+.gallery {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1rem;
+}
+
+@media (min-width: 600px) {
+  .gallery {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+/* Grelha de fotos (dentro de um álbum) */
+.gallery__item {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  aspect-ratio: 1;
+  transition: box-shadow var(--transition);
+  animation: itemEnter 0.45s var(--transition) both;
+}
+
+@keyframes itemEnter {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.gallery__link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  line-height: 0;
+  cursor: zoom-in;
+  color: inherit;
+  text-decoration: none;
+  overflow: hidden;
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+}
+
+.gallery__link:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--radius);
+}
+
+.gallery__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.45s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.gallery__link:hover .gallery__img,
+.gallery__link:focus-visible .gallery__img {
+  transform: scale(1.06);
+}
+
+/* Rodapé */
+.footer {
+  text-align: center;
+  margin-top: 2.5rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ---------- Lightbox (com navegação tipo carrossel) ---------- */
+.lightbox[hidden] {
+  display: none !important;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: lightboxIn 0.32s var(--transition) both;
+}
+
+.lightbox__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 0;
+  max-height: 100%;
+  flex: 1;
+  pointer-events: none;
+}
+
+.lightbox__inner > * {
+  pointer-events: auto;
+}
+
+.lightbox__stage {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  width: 100%;
+  max-width: min(100%, 1000px);
+  min-height: 0;
+}
+
+@keyframes lightboxIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.lightbox__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(32, 28, 25, 0.72);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: none;
+  cursor: pointer;
+  z-index: 0;
+}
+
+.lightbox__content {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+  max-width: min(90vw, 900px);
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: contentIn 0.4s 0.05s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes contentIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.lightbox__img {
+  display: block;
+  max-width: 100%;
+  max-height: min(78vh, 85dvh);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--radius);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.35);
+  transition: opacity 0.2s ease;
+}
+
+.lightbox__img.is-fading {
+  opacity: 0.35;
+}
+
+.lightbox__meta {
+  margin-top: 0.65rem;
+  text-align: center;
+  max-width: 100%;
+  padding: 0 0.5rem;
+}
+
+.lightbox__caption {
+  margin: 0;
+  color: #f0ebe4;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.lightbox__counter {
+  margin: 0.25rem 0 0;
+  color: rgba(240, 235, 228, 0.65);
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.lightbox__nav {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 1.75rem;
+  line-height: 1;
+  font-weight: 300;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  padding: 0 0 2px;
+  font-family: inherit;
+  transition: background 0.2s ease, transform 0.15s ease, opacity 0.2s ease;
+}
+
+.lightbox__nav:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.22);
+  transform: scale(1.05);
+}
+
+.lightbox__nav:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+.lightbox__nav:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+  transform: none;
+}
+
+@media (max-width: 520px) {
+  .lightbox__stage {
+    gap: 0.15rem;
+  }
+
+  .lightbox__nav {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    font-size: 1.5rem;
+  }
+}
+
+.lightbox__close {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  font-family: inherit;
+}
+
+.lightbox__close:hover {
+  background: rgba(255, 255, 255, 0.22);
+  transform: scale(1.05);
+}
+
+.lightbox__close:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+body.lightbox-open {
+  overflow: hidden;
+}
