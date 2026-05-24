@@ -38,15 +38,27 @@ const desenhos = [
       legenda: `Cars - ${n}`,
     };
   }),
+  ...[
+    { file: "eye 1.jpeg", legenda: "Eye — 1" },
+    { file: "eye 2.jpeg", legenda: "Eye — 2" },
+    { file: "nose 1.jpg", legenda: "Nose — 1" },
+    { file: "nose 2.jpeg", legenda: "Nose — 2" },
+    { file: "sphere.jpg", legenda: "Sphere" },
+  ].map(({ file, legenda }) => ({
+    src: `imagens/new/${encodeURIComponent(file)}`,
+    tipo: "new",
+    legenda: `New — ${legenda}`,
+  })),
 ];
 
 /** Ordem e títulos na lista de álbuns */
-const ORDEM_ALBUNS = ["combat_story", "combat_story_2", "monsters", "cars"];
+const ORDEM_ALBUNS = ["combat_story", "combat_story_2", "monsters", "cars", "new"];
 const TITULO_ALBUM = {
   combat_story: "Combat story - 2005",
   combat_story_2: "Combat story 2 - 2006",
   monsters: "Monsters - 2006",
   cars: "Cars - 2005",
+  new: "New",
 };
 
 /** itens[] por tipo (id do álbum) */
